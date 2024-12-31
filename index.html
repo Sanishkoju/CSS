@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.grid-box{
+    padding:40px;
+    background-color: #E8EAEB;
+}
+        .container{
+            max-width: 1480px;
+            display: block;
+            margin:auto;
+
+            /* margin:-40px; */
+        }
+        .wrapper{  
+          column-count: 3; 
+          column-gap: 40px; 
+          
+        }
+        .widget{
+            background-color: #fff;
+            max-width: 770px;
+            display: grid;
+            place-content: center;
+            font-size: 25px;
+            font-weight: 500;
+            margin-bottom: 40px; /* Spacing between items */
+            break-inside: avoid; /* Prevent items from breaking across columns */
+        }
+        .widget1{
+            height: 449px;
+            top: 275px;
+            left: 282px;           
+        }
+        .widget2{
+            height: 760px;
+        }
+        .widget3{
+            height: 596px;
+            background-color: #E7AA6C;     
+        }
+        .widget4{
+            height: 812px;
+        }
+        .widget5{
+            height: 284px;
+        }
+        .widget6{
+            height: 596px;
+            background-color: #E7AA6C;
+        }
+        @media(max-width: 1000px) {
+            .wrapper{  
+          column-count: 2; 
+          column-gap: 40px; 
+            }
+        }
+        </style>
+</head>
+<body>
+    <div class="grid-box">
+        <div class="container">
+            <div class="wrapper">
+                <div class="widget widget1">
+                    Widget 1
+                </div>
+                <div class="widget widget2">
+                    Widget 2
+                </div>
+
+                <div class="widget widget3">
+                    Widget 3
+                </div>
+                <div class="widget widget4">
+                    Widget 4
+                </div>
+                <div class="widget widget5">
+                    Widget 5
+                </div>
+                <div class="widget widget6">
+                    Widget 6
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".wrapper");
+  const items = Array.from(container.children);
+
+
+  const reorderItems = (order) => {
+    const reorderedItems = order.map(index => items[index]);
+    container.innerHTML = "";
+    reorderedItems.forEach(item => container.appendChild(item));
+  };
+
+  const defaultOrder = [0, 3, 1, 4, 2, 5];
+  const smallScreenOrder = [0, 3, 2, 1, 4, 5]; 
+
+ 
+  const mediaQuery = window.matchMedia("(max-width: 1000px)");
+  mediaQuery.addEventListener("change", (e) => {
+    if (e.matches) {
+      reorderItems(smallScreenOrder); r
+    } else {
+      reorderItems(defaultOrder); 
+    }
+  });
+
+  // Initial check
+  if (mediaQuery.matches) {
+    reorderItems(smallScreenOrder);
+  } else {
+    reorderItems(defaultOrder);
+  }
+});
+
+
+    </script>
+</body>
+</html>
